@@ -18,7 +18,7 @@ docker-compose up
 
 - View Prometheus UI - `http://localhost:9090`
 - Grafana UI - `http://localhost:3000` (admin:admin)
-- Alert Manager - 'https://localhost:9093'
+- Alert Manager - `http://localhost:9093`
 - Alerts will hit your Slack instance once you have replaced the slack_api_url: and channel: values with the correct URL and channel of your choice. Slack will generate the URL required when you add 'incoming-webhook' to your channel of choice. See here: https://api.slack.com/incoming-webhooks
 
 ### Sending Kafka messages
