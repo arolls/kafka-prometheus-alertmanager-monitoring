@@ -4,7 +4,7 @@ global:
   # scrape_timeout is set to the global default (10s).
 
 rule_files:
-  - 'rules/rules.yml'
+  - 'rules/*.yml'
 
 # Alertmanager configuration
 alerting:

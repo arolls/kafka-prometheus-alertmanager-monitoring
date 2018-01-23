@@ -29,29 +29,3 @@ groups:
       severity: critical
     annotations:
       summary: CPU Load 90%+
-#
-# ALERT BytesInPerSec
-#   IF kafka_server_brokertopicmetrics_oneminuterate{name="BytesInPerSec"} > 50000
-#   FOR 10s
-#   LABELS { severity = "critical" }
-#   ANNOTATIONS {
-#     summary = "Kafka Bytes In Per Sec Exceeding 50k".
-#     description = "KAF BYTES IN 50K+"
-#   }
-#ALERT HostDown
-#  IF up == 0
-#  FOR 5m
-#  LABELS { severity = "page" }
-#  ANNOTATIONS {
-#    summary = "Host {{$labels.instance}} is down",
-#    description = "{{$labels.instance}} of job {{$labels.job}} has been down for more than 5 minutes"
-#  }
-#
-#ALERT HostLowMemory
-#  IF node_memory_MemAvailable < 268435456
-#  FOR 5m
-#  LABELS { severity = "page" }
-#  ANNOTATIONS {
-#    summary = "Host {{$labels.instance}}: memory low",
-#    description = "{{$labels.instance}} has less than 256M memory available"
-#  }
