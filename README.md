@@ -37,3 +37,13 @@ The kafka metrics are pulled into Prometheus via the JMX exporter.  These can be
 Grafana can be used to build a more meaningful dashboard of the metrics in Prometheus, navigate to Grafana on `http://localhost:3000` (admin:admin).  An example dashboard is available to import in `dashboards/Kafka.json`. You must add Prometheus as a data source on https://localhost:9090 (direct) and called the data source 'Prometheus'.
 
 ![Grafana Kafka Dashboard](images/grafana-ui.png?raw=true)
+
+### Alerts in Alert Manager
+Applying enough load to the topics will cause an alert to be triggered. The rules set in [rules.yml](../master/mount/prometheus/rules/rules.yml) are for 50k Bytes In, 100k Bytes In, 150k Bytes In and 90% CPU. When applying messages to the topics using the aforementioned commands you'll see the alerts triggered in Alert Manager.
+
+![Alert Manager](../images/alertmanager.png?raw=true)
+
+### Alerts in Slack
+When the Alert Manager receives the alert state from Prometheus the API call is made to Slack webhooks to display the alert in your chosen slack channel. Taking the pressure off Kafka by stopping sending messages to the topics will bring the bytes in down and the alarms will resolve.
+
+![Slack](../images/slack.png?raw=true)
