@@ -3,10 +3,20 @@ global:
   evaluation_interval: 10s # By default, scrape targets every 15 seconds.
   # scrape_timeout is set to the global default (10s).
 
+rule_files:
+  - 'rules/rules.yml'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - alertmanager1:9093, alertmanager2:9093
+
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
   - job_name: 'kafka'
-    scrape_interval: 10s
-    target_groups:
+    scrape_interval: 5s
+    static_configs:
       - targets: ['kafka-jmx-exporter:8080']

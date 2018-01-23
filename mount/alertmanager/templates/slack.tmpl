@@ -1,0 +1,7 @@
+{{ define "__slack_text" }}
+{{ range .Alerts }}
+{{ .Annotations.summary }}
+{{ .Annotations.description }}
+{{ end }}
+:notebook: https://en.wikipedia.org/wiki/Runbook{{ end }}
+{{ define "slack.default.text" }}{{ template "__slack_text" . }}{{ end }}
