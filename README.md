@@ -19,14 +19,15 @@ docker-compose up
 - View Prometheus UI - `http://localhost:9090`
 - Grafana UI - `http://localhost:3000` (admin:admin)
 - Alert Manager - `http://localhost:9093`
-- Alerts will hit your Slack instance once you have replaced the slack_api_url: and channel: values with the correct URL and channel of your choice. Slack will generate the URL required when you add 'incoming-webhook' to your channel of choice. See here: https://api.slack.com/incoming-webhooks
+- Alerts will hit your Slack instance once you have replaced the slack_api_url: and channel: values with the correct URL and channel of your choice in [config.yml](../master/mount/alertmanager/config.yml). Slack will generate the URL required when you add 'incoming-webhook' to your channel of choice. See here: https://api.slack.com/incoming-webhooks
 
 ### Sending Kafka messages
-In order for the Kafka broker to expose JMX topic metrics you must send some messages to the topics.
+In order for the Kafka broker to expose JMX topic metrics you must send some messages to the topics. The best way to achieve this is to download Kafka from here: https://kafka.apache.org/downloads (I used 1.0.0) and use the Kafka Console Producer.
 ```
-cat 100k-messages | docker run -i -a stdin wurstmeister/kafka /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic customer
-cat 100k-messages | docker run -i -a stdin wurstmeister/kafka /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic audit
+cat 100k-messages | ./kafka-console-producer.sh --broker-list localhost:9092 --topic customer
+cat 100k-messages | ./kafka-console-producer.sh --broker-list localhost:9092 --topic audit
 ```
+When applying messages to the system you will see an increase in the Bytes In metrics in Grafana.
 
 ### Viewing Prometheus Metrics
 The kafka metrics are pulled into Prometheus via the JMX exporter.  These can be viewed in Prometheus by navigating to `http://localhost:9090/graph`, enter a metric name to view the graphs.
