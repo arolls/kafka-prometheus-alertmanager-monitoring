@@ -35,7 +35,7 @@ services:
   prometheus:
     ports:
       - 9090:9090/tcp
-    image: prom/prometheus:latest
+    image: prom/prometheus:v2.1.0
     volumes:
       - ./mount/prometheus:/etc/prometheus
     links:
@@ -44,14 +44,14 @@ services:
   alertmanager:
     ports:
       - "9093:9093"
-    image: prom/alertmanager:latest
+    image: prom/alertmanager:v0.13.0
     volumes:
       - ./mount/alertmanager:/etc/alertmanager
     links:
       - prometheus
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:4.6.3
     ports:
       - 3000:3000/tcp
     links:
