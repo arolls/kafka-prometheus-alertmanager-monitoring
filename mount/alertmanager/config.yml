@@ -1,13 +1,13 @@
 ---
 global:
   slack_api_url: https://hooks.slack.com/services/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
-  resolve_timeout: 10s
+  resolve_timeout: 5m
 route:
   receiver: slack
   group_by:
   - alertname
   - service
-  repeat_interval: 1h
+  repeat_interval: 15m
   routes:
   - match:
       severity: critical

@@ -1,31 +1,61 @@
 groups:
 - name: kafka
   rules:
-  - alert: BytesInPerSec50kThreshold
-    expr: kafka_server_brokertopicmetrics_oneminuterate{name="BytesInPerSec"} > 5000
+  - alert: BytesIn100Bps
+    expr: kafka_server_brokertopicmetrics_oneminuterate{name="BytesInPerSec"} > 100
     for: 10s
     labels:
       severity: warning
     annotations:
-      summary: Kafka High Bytes In CRIT 5k (10sec)
-  - alert: BytesInPerSec100kThreshold
-    expr: kafka_server_brokertopicmetrics_oneminuterate{name="BytesInPerSec"} > 10000
+      summary: Kafka High Bytes In CRIT 100B/s (10sec)
+  - alert: BytesIn200Bps
+    expr: kafka_server_brokertopicmetrics_oneminuterate{name="BytesInPerSec"} > 200
     for: 10s
     labels:
-      severity: critical
+      severity: warning
     annotations:
-      summary: Kafka High Bytes In CRIT 10k (10sec)
-  - alert: BytesInPerSec150kThreshold
-    expr: kafka_server_brokertopicmetrics_oneminuterate{name="BytesInPerSec"} > 15000
+      summary: Kafka High Bytes In CRIT 200B/s (10sec)
+  - alert: BytesIn500Bps
+    expr: kafka_server_brokertopicmetrics_oneminuterate{name="BytesInPerSec"} > 500
     for: 10s
     labels:
-      severity: critical
+      severity: warning
     annotations:
-      summary: Kafka High Bytes In CRIT 15k (10sec)
-  - alert: CPU-90%+
-    expr: java_lang_operatingsystem_systemcpuload > 90
-    for: 1s
-    labels:
-      severity: critical
-    annotations:
-      summary: CPU Load 90%+
+      summary: Kafka High Bytes In CRIT 500B/s (10sec)
+# - name: hosts
+#   rules:
+#   - alert: CPU-10%+
+#     expr: java_lang_operatingsystem_systemcpuload > 0.1
+#     for: 5s
+#     labels:
+#       severity: warning
+#     annotations:
+#       summary: CPU Load 10%+
+#   - alert: CPU-20%+
+#     expr: java_lang_operatingsystem_systemcpuload > 0.2
+#     for: 5s
+#     labels:
+#       severity: warning
+#     annotations:
+#       summary: CPU Load 20%+
+#   - alert: CPU-50%+
+#     expr: java_lang_operatingsystem_systemcpuload > 0.5
+#     for: 5s
+#     labels:
+#       severity: critical
+#     annotations:
+#       summary: CPU Load 50%+
+  # - alert: BytesInPerSec50kThreshold
+  #   expr: kafka_server_brokertopicmetrics_oneminuterate{name="BytesInPerSec"} > 50000
+  #   for: 10s
+  #   labels:
+  #     severity: critical
+  #   annotations:
+  #     summary: Kafka High Bytes In CRIT 10k (10sec)
+  # - alert: BytesInPerSec15kThreshold
+  #   expr: kafka_server_brokertopicmetrics_oneminuterate{name="BytesInPerSec"} > 15000
+  #   for: 10s
+  #   labels:
+  #     severity: critical
+  #   annotations:
+  #     summary: Kafka High Bytes In CRIT 15k (10sec)
